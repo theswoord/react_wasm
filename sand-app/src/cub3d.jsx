@@ -109,7 +109,7 @@ function Cub3D() {
             return () => {
       const instance = moduleRef.current;
         if (typeof instance._cleanup === 'function') {
-        // console.log('Calling instance._cleanup() from JS...');
+        console.log('Calling instance._cleanup() from JS...');
         instance._cleanup();
       }
       if (instance && typeof instance.exit === 'function') {
