@@ -106,6 +106,21 @@ function Cub3D() {
             }
             instance.callMain();
         });
+            return () => {
+      const instance = moduleRef.current;
+        if (typeof instance._cleanup === 'function') {
+        // console.log('Calling instance._cleanup() from JS...');
+        instance._cleanup();
+      }
+      if (instance && typeof instance.exit === 'function') {
+        try {
+          instance.exit();
+        } catch(e) {
+          // exit() can sometimes throw an error if the runtime is already dead
+          console.warn("Error during module exit:", e);
+        }
+      }
+    };
     }, []);
 
     // --- UI Interaction Handlers ---

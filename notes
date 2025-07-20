@@ -1,0 +1,31 @@
+emcc main_wasm.cpp sand.cpp     -o ../react-wasm/reactgame.js \
+    -O3  \
+    -s USE_SDL=2 \
+    -s WASM=1 \
+    -s MODULARIZE=1 \
+    -s EXPORT_ES6=1 \
+    -s INVOKE_RUN=0 \
+    -s ALLOW_MEMORY_GROWTH=1 \
+    -lembind \
+    -s EXPORTED_RUNTIME_METHODS="['callMain']"
+
+    emcc main_wasm.cpp sand.cpp     -o ../react_wasm/reactgame.js \
+    -s USE_SDL=2 \
+    -s WASM=1 \
+    -s MODULARIZE=1 \
+    -s EXPORT_ES6=1 \
+    -s INVOKE_RUN=0 \
+    -s ALLOW_MEMORY_GROWTH=1 \
+    -s EXPORTED_RUNTIME_METHODS="['callMain']"
+
+        emcc main_wasm.cpp sand.cpp     -o ../react_wasm/sand-app/src/game/reactgame.js \
+    -s USE_SDL=2 \
+    -s WASM=1 \
+    -s MODULARIZE=1 \
+    -s EXPORT_ES6=1 \
+    -s INVOKE_RUN=0 \
+    -s ALLOW_MEMORY_GROWTH=1 \
+    -s EXPORTED_RUNTIME_METHODS="['callMain']"
+
+
+    npm run dev
