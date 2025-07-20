@@ -4,15 +4,6 @@ import wasmUrl from './game/cub.wasm?url';
 import dataUrl from './game/cub.data?url';
 
 // --- Helper Functions to Parse and Build the Map ---
-const availableTextures = [
-    './assets/studio1.png',
-    './assets/studio2.png',
-    './assets/studio4.png',
-    './assets/studio5.png',
-    // Add any other texture filenames here
-];
-
-
 
 const DEFAULT_MAP_TEMPLATE = `NO ./assets/studio1.png
 SO ./assets/studio2.png
@@ -139,22 +130,6 @@ function Cub3D() {
             alert('Failed to Delete Map.');
         }
     };
-            const ExportFile = () => {
-        const fullMapData = buildMapData(textures, colors, mapGrid);
-        console.log(fullMapData);
-        var a = window.document.createElement('a');
-        a.href = window.URL.createObjectURL(new Blob([fullMapData], {type: 'text/cub'}));
-        a.download = 'Map.txt';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        // try {
-        //    console.log(fullMapData.JsonParse)
-        //     alert('Block.cub Is back to it\'s original state');
-        // } catch (e) {
-        //     alert('Failed to Delete Map.');
-        // }
-    };
 
     return (
         <div className="game-container" style={{ display: 'flex', gap: '20px' }}>
@@ -167,19 +142,13 @@ function Cub3D() {
                 {Object.keys(textures).map(key => (
                     <div key={key}>
                         <label>{key}: </label>
-                        <select
+                        <input
+                            type="text"
                             value={textures[key]}
                             onChange={(e) => setTextures({ ...textures, [key]: e.target.value })}
                             onFocus={handleFocus}
                             onBlur={handleBlur}
-                        >
-                            <option value="">--Select a Texture--</option>
-                            {availableTextures.map(textureFile => (
-                                <option key={textureFile} value={textureFile}>
-                                    {textureFile}
-                                </option>
-                            ))}
-                        </select>
+                        />
                     </div>
                 ))}
 
@@ -213,9 +182,6 @@ function Cub3D() {
                 </button>
                 <button onClick={ResetMap} style={{ marginTop: '10px' }}>
                     Reset and Reload
-                </button>
-                <button onClick={ExportFile} style={{ marginTop: '10px' }}>
-                    Export your Map
                 </button>
             </div>
         </div>
