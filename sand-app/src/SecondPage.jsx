@@ -1,7 +1,13 @@
 import React from 'react';
+import Cub3D from './cub3d';
 
 function SecondPage() {
-  return <h1>This is the Second Page! 🥈</h1>;
+  return (
+      <div>
+      <h1>second 🎮</h1>
+      <Cub3D gameName="game1" />
+    </div>
+  );
 }
 
 export default SecondPage;
