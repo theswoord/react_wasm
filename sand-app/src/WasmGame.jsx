@@ -24,25 +24,44 @@ function WasmGame({ gameName }) { // gameName is now just for logging
       // if (instance && typeof instance.exit === 'function') {
       //   instance.exit();
       // }
-       if (typeof instance._cleanup === 'function') {
+      if (typeof instance._cleanup === 'function') {
         // console.log('Calling instance._cleanup() from JS...');
         instance._cleanup();
       }
-      if(typeof instance.exit === 'function') {
+      if (typeof instance.exit === 'function') {
         instance.exit();
       }
     };
   }, []);
 
   return (
-    <div className="game-container">
-      <canvas
-        ref={canvasRef}
-        id="canvas"
-        width="800"
-        height="600"
-      ></canvas>
-    </div>
+
+   <div className="game-container">
+  <canvas
+    ref={canvasRef}
+    id="canvas"
+    width="800"
+    height="600"
+  ></canvas>
+  <div className="tutorial" style={{
+    // backgroundColor: 'tomato'
+  }}>
+    <h2>Commands</h2>
+    <ul style={{ listStyleType: 'none', paddingLeft: 0 }}>
+      <li><strong style={{ display: 'inline-block', minWidth: '50px' }}>E:</strong> Pick a random element</li>
+      <li><strong style={{ display: 'inline-block', minWidth: '50px' }}>R:</strong> Spawn a random element</li>
+      <li><strong style={{ display: 'inline-block', minWidth: '50px' }}>1-9:</strong> Choose Element</li>
+    </ul>
+    <h2>Elements</h2>
+    <ul style={{ listStyleType: 'none', paddingLeft: 0 }}>
+      <li style={{color: '#F2D2A9'}} ><strong style={{ display: 'inline-block', minWidth: '50px' }}>1:</strong> Sand</li>
+      <li style={{color: '#7F8386'}} ><strong style={{ display: 'inline-block', minWidth: '50px' }}>2:</strong> Rock</li>
+      <li style={{color: '#99C0E3'}} ><strong style={{ display: 'inline-block', minWidth: '50px' }}>3:</strong> Water</li>
+      <li style={{color: '#FFA500'}} ><strong style={{ display: 'inline-block', minWidth: '50px' }}>4:</strong> Bronze</li>
+      <li style={{color: 'white'}} ><strong style={{ display: 'inline-block', minWidth: '50px' }}>5-0:</strong> Empty / Delete</li>
+    </ul>
+  </div>
+</div>
   );
 }
 

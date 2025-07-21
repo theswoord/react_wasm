@@ -18,15 +18,19 @@ const DEFAULT_MAP_TEMPLATE = `NO ./assets/studio1.png
 SO ./assets/studio2.png
 WE ./assets/studio4.png
 EA ./assets/studio5.png
-F 220,100,0
-C 225,30,0
+F 0,0,0
+C 0,0,0
 
-1111111111
-1000100001
-1000100001
-10N0100001
-1000000001
-1111111111`;
+11111111111111
+10000000000001
+10000001000001
+10000000000001
+1001000N000101
+10000000000001
+10000000000001
+10000001000001
+10000000000001
+11111111111111`;
 
 // Parses the full .cub file content into structured objects
 const parseMapData = (mapContent) => {
@@ -139,7 +143,8 @@ function Cub3D() {
         const fullMapData = buildMapData(textures, colors, mapGrid);
         try {
             localStorage.setItem('customCub3dMap', fullMapData);
-            alert('Map saved! Reload the page to see your changes.');
+            // alert('Map saved! Reload the page to see your changes.');
+            location.reload();
         } catch (e) {
             alert('Failed to save map.');
         }
@@ -149,7 +154,9 @@ function Cub3D() {
         try {
             // localStorage.setItem('customCub3dMap', fullMapData);
             localStorage.removeItem('customCub3dMap');
-            alert('Block.cub Is back to it\'s original state');
+            location.reload();
+
+            // alert('Block.cub Is back to it\'s original state');
         } catch (e) {
             alert('Failed to Delete Map.');
         }
