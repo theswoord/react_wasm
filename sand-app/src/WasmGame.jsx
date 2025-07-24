@@ -58,7 +58,8 @@ function WasmGame({ gameName }) { // gameName is now just for logging
       <li style={{color: '#7F8386'}} ><strong style={{ display: 'inline-block', minWidth: '50px' }}>2:</strong> Rock</li>
       <li style={{color: '#99C0E3'}} ><strong style={{ display: 'inline-block', minWidth: '50px' }}>3:</strong> Water</li>
       <li style={{color: '#FFA500'}} ><strong style={{ display: 'inline-block', minWidth: '50px' }}>4:</strong> Bronze</li>
-      <li style={{color: 'white'}} ><strong style={{ display: 'inline-block', minWidth: '50px' }}>5-0:</strong> Empty / Delete</li>
+      <li style={{color: '#FDFE03'}} ><strong style={{ display: 'inline-block', minWidth: '50px' }}>5:</strong> Sponge</li>
+      <li style={{color: 'white'}} ><strong style={{ display: 'inline-block', minWidth: '50px' }}>6-0:</strong> Empty / Delete</li>
     </ul>
   </div>
 </div>

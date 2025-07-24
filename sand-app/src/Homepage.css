@@ -1,0 +1,45 @@
+/* HomePage.css */
+
+@keyframes wiggle {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(-3deg); } /* Wiggle a bit to the left */
+  50% { transform: rotate(3deg); }  /* Wiggle a bit to the right */
+  75% { transform: rotate(-3deg); } /* Wiggle back to the left */
+  100% { transform: rotate(0deg); } /* Return to original position */
+}
+
+.home-page-container {
+  display: flex; /* Use flexbox for centering */
+  flex-direction: column; /* Stack items vertically */
+  align-items: center; /* Center horizontally */
+  justify-content: center; /* Center vertically */
+  min-height: 100vh; /* Take full viewport height */
+  text-align: center; /* Center text within the container */
+}
+
+.controller-link {
+  display: inline-block;
+  border: none;
+  padding: 0;
+  background: none;
+  cursor: pointer;
+  /* Remove the previous 'transform' transition if you had one for scaling,
+     as we're now animating rotation. If you want both, you'll need to combine them
+     or use a separate transform for scale on hover. */
+  transition: none; /* Reset transition for transform so animation takes over */
+  max-width: 300px;
+  height: auto;
+}
+
+.controller-link:hover {
+  /* Apply the wiggle animation on hover */
+  animation: wiggle 0.3s ease-in-out infinite; /* Apply the animation */
+  /* If you still want a slight scale on hover, add it here: */
+  /* transform: scale(1.05); */
+}
+
+.controller-button {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}

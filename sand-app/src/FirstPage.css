@@ -1,0 +1,11 @@
+/* FirstPage.css */
+.spoiler {
+  visibility: hidden; /* Hide the text initially */
+  opacity: 0; /* Make it completely transparent initially */
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out; /* Smooth transition */
+}
+
+h1:hover .spoiler {
+  visibility: visible; /* Make the text visible on hover */
+  opacity: 1; /* Make it fully opaque on hover */
+}
