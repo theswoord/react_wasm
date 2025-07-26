@@ -1,0 +1,32 @@
+
+
+
+.game-container 
+{
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+}
+.wrapper 
+{
+    display: flex;
+    gap: 20px;
+}
+#canvas 
+{
+
+    border: 1px solid black;
+    /* tabIndex:"0"; */
+}
+.map-editor
+{
+    font-family: sans-serif;
+}
+.map-editor textarea
+{
+    font-family: monospace;
+}
+.map-editor button
+{
+    margin-top: 10px;
+}

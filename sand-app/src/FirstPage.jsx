@@ -6,7 +6,7 @@ import './FirstPage.css'; // Import a CSS file for styling
 function FirstPage() {
   return (
     <div>
-      <h1>
+      <h1 class = "titl">
         The Sand Game
         <span className="spoiler"> + secret reactions</span>
       </h1>

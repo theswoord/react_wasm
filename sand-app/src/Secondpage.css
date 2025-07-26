@@ -1,0 +1,125 @@
+/* Secondpage.css */
+
+/* Basic styling for the main container */
+.main-page-container {
+    position: relative; /* This is important! It makes the absolute positioning of .movement-hidden relative to this div. */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    /* background-color: #f0f0f0; Light background for the page */
+    min-height: 100vh; /* Ensure it takes full viewport height */
+    /* color: #333; Default text color */
+}
+
+h1 {
+    color: #0056b3; /* A nice blue for the main title */
+    margin-bottom: 10px;
+}
+
+/* Style for the hover trigger text */
+.hover-trigger-text {
+    cursor: pointer; /* Indicates it's interactive */
+    color: #007bff; /* Blue color to make it look like a link */
+    text-decoration: underline; /* Underline to emphasize it's clickable/hoverable */
+    margin-bottom: 20px; /* Space below the trigger */
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+/* Initial state for the hidden movement instructions div */
+.movement-hidden {
+    display: none; /* Initially hide the element from the document flow */
+    opacity: 0;    /* Start fully transparent for a fade-in effect */
+    transition: opacity 0.3s ease-in-out; /* Smooth transition for opacity changes */
+    
+    background-color: tomato; /* Keep original background color */
+    color: white; /* Ensure text is readable on tomato background */
+    padding: 20px; /* Add some padding inside the box */
+    border-radius: 8px; /* Slightly rounded corners */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Add a subtle shadow */
+    text-align: left; /* Align text to the left within the box */
+
+    /* Positioning to overlay the content (like the canvas) */
+    position: absolute; /* Position it relative to the nearest positioned ancestor (.main-page-container) */
+    top: 50%; /* Vertically center it */
+    left: 50%; /* Horizontally center it */
+    transform: translate(-50%, -50%); /* Adjust for its own width/height to perfectly center */
+    z-index: 100; /* Ensure it appears on top of other elements */
+    max-width: 600px; /* Limit its maximum width */
+    width: 90%; /* Make it responsive up to max-width */
+    max-height: 80vh; /* Limit its maximum height to viewport height */
+    overflow-y: auto; /* Add scrollbar if content overflows vertically */
+    
+    pointer-events: none; /* IMPORTANT: Allows mouse events to pass through when hidden */
+}
+
+/* When the 'hover-trigger-text' is hovered, make its adjacent sibling '.movement-hidden' appear */
+.hover-trigger-text:hover + .movement-hidden {
+    display: block; /* Make it visible and take up space */
+    opacity: 1; /* Fade it in to full visibility */
+    pointer-events: auto; /* IMPORTANT: Allow mouse interaction with the overlay when visible */
+}
+
+/* Styles for ul and li strong within movement-hidden */
+.movement-hidden h1 {
+    font-size: 1.8em;
+    margin-bottom: 15px;
+    color: white; /* Ensure title is white on tomato background */
+    text-align: center;
+}
+
+.movement-hidden ul {
+    text-align: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bolder;
+    list-style: none; /* Remove default bullet points for main ul */
+    padding: 0;
+    margin-bottom: 10px;
+}
+
+.movement-hidden ul ul { /* Nested ul for specific instructions */
+    list-style: disc; /* Add disc bullet points for sub-lists */
+    list-style-position: inside; /* Keep bullets inside the text flow */
+    margin-left: 20px; /* Indent sub-lists */
+    font-weight: normal; /* Reset font-weight for sub-list text */
+}
+
+.movement-hidden li {
+    margin-bottom: 5px;
+}
+
+.movement-hidden li strong {
+    display: inline-block; /* Allows setting min-width */
+    min-width: 120px; /* Adjust as needed for alignment */
+    font-weight: bold;
+    color: #f8f8f8; /* Slightly off-white for key bindings */
+}
+
+/* Styles for the Cub3D component's canvas and editor (from your original code) */
+/* Assuming cub3d.jsx will import its own CSS or have inline styles */
+/* If you want these styles in Secondpage.css, you'd need to add them here */
+/* For now, keeping them separate as per your original file structure */
+/*
+.game-container {
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+}
+.wrapper {
+    display: flex;
+    gap: 20px;
+}
+#canvas {
+    border: 1px solid black;
+}
+.map-editor {
+    font-family: sans-serif;
+}
+.map-editor textarea {
+    font-family: monospace;
+}
+.map-editor button {
+    margin-top: 10px;
+}
+*/

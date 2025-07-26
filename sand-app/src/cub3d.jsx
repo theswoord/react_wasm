@@ -2,6 +2,8 @@ import React, { useRef, useEffect, useState } from 'react';
 import gameModule from './game/cub.js';
 import wasmUrl from './game/cub.wasm?url';
 import dataUrl from './game/cub.data?url';
+import movement from './assets/movementcube.png'
+import './cube3d.css'
 
 // --- Helper Functions to Parse and Build the Map ---
 const availableTextures = [
@@ -9,6 +11,13 @@ const availableTextures = [
     './assets/studio2.png',
     './assets/studio4.png',
     './assets/studio5.png',
+    './assets/brick.png',
+    './assets/tree2.png',
+    './assets/studio0.png',
+    './assets/studio3.png',
+    './assets/SO.png',
+    './assets/NO.png',
+
     // Add any other texture filenames here
 ];
 
@@ -110,21 +119,21 @@ function Cub3D() {
             }
             instance.callMain();
         });
-            return () => {
-      const instance = moduleRef.current;
-        if (typeof instance._cleanup === 'function') {
-        console.log('Calling instance._cleanup() from JS...');
-        instance._cleanup();
-      }
-      if (instance && typeof instance.exit === 'function') {
-        try {
-          instance.exit();
-        } catch(e) {
-          // exit() can sometimes throw an error if the runtime is already dead
-          console.warn("Error during module exit:", e);
-        }
-      }
-    };
+        return () => {
+            const instance = moduleRef.current;
+            if (typeof instance._cleanup === 'function') {
+                console.log('Calling instance._cleanup() from JS...');
+                instance._cleanup();
+            }
+            if (instance && typeof instance.exit === 'function') {
+                try {
+                    instance.exit();
+                } catch (e) {
+                    // exit() can sometimes throw an error if the runtime is already dead
+                    console.warn("Error during module exit:", e);
+                }
+            }
+        };
     }, []);
 
     // --- UI Interaction Handlers ---
@@ -138,7 +147,7 @@ function Cub3D() {
         // Tell the C module that the UI is no longer focused
         moduleRef.current?.ccall('set_ui_focus', null, ['number'], [0]);
     };
-    
+
     const handleSave = () => {
         const fullMapData = buildMapData(textures, colors, mapGrid);
         try {
@@ -149,7 +158,7 @@ function Cub3D() {
             alert('Failed to save map.');
         }
     };
-        const ResetMap = () => {
+    const ResetMap = () => {
         const fullMapData = buildMapData(textures, colors, mapGrid);
         try {
             // localStorage.setItem('customCub3dMap', fullMapData);
@@ -161,11 +170,11 @@ function Cub3D() {
             alert('Failed to Delete Map.');
         }
     };
-            const ExportFile = () => {
+    const ExportFile = () => {
         const fullMapData = buildMapData(textures, colors, mapGrid);
         console.log(fullMapData);
         var a = window.document.createElement('a');
-        a.href = window.URL.createObjectURL(new Blob([fullMapData], {type: 'text/cub'}));
+        a.href = window.URL.createObjectURL(new Blob([fullMapData], { type: 'text/cub' }));
         a.download = 'Map.txt';
         document.body.appendChild(a);
         a.click();
@@ -179,69 +188,75 @@ function Cub3D() {
     };
 
     return (
-        <div className="game-container" style={{ display: 'flex', gap: '20px' }}>
-            <canvas ref={canvasRef} id="canvas" width="800" height="600" style={{ border: '1px solid black' }} tabIndex="0" ></canvas>
-            
-            <div className="map-editor" style={{ fontFamily: 'sans-serif' }}>
-                <h3>Custom Map Editor</h3>
-                
-                <h4>Textures</h4>
-                {Object.keys(textures).map(key => (
-                    <div key={key}>
-                        <label>{key}: </label>
-                        <select
-                            value={textures[key]}
-                            onChange={(e) => setTextures({ ...textures, [key]: e.target.value })}
-                            onFocus={handleFocus}
-                            onBlur={handleBlur}
-                        >
-                            <option value="">--Select a Texture--</option>
-                            {availableTextures.map(textureFile => (
-                                <option key={textureFile} value={textureFile}>
-                                    {textureFile}
-                                </option>
-                            ))}
-                        </select>
-                    </div>
-                ))}
+        <div className="game-container" >
 
-                <h4>Colors (R,G,B)</h4>
-                {Object.keys(colors).map(key => (
-                    <div key={key}>
-                        <label>{key === 'F' ? 'Floor' : 'Ceiling'}: </label>
-                        <input
-                            type="text"
-                            value={colors[key]}
-                            onChange={(e) => setColors({ ...colors, [key]: e.target.value })}
-                            onFocus={handleFocus}
-                            onBlur={handleBlur}
-                        />
-                    </div>
-                ))}
+            <div class="wrapper" >
+                <canvas ref={canvasRef} id="canvas" width="800" height="600" tabIndex="0" ></canvas>
 
-                <h4>Map Grid</h4>
-                <textarea
-                    rows="10"
-                    cols="30"
-                    value={mapGrid}
-                    onChange={(e) => setMapGrid(e.target.value)}
-                    onFocus={handleFocus}
-                    onBlur={handleBlur}
-                    style={{ fontFamily: 'monospace' }}
-                ></textarea>
-                <br />
-                <button onClick={handleSave} style={{ marginTop: '10px' }}>
-                    Save Map & Reload
-                </button>
-                <button onClick={ResetMap} style={{ marginTop: '10px' }}>
-                    Reset and Reload
-                </button>
-                <button onClick={ExportFile} style={{ marginTop: '10px' }}>
-                    Export your Map
-                </button>
+                <div className="map-editor" >
+                    <h3>Custom Map Editor</h3>
+
+                    <h4>Textures</h4>
+                    {Object.keys(textures).map(key => (
+                        <div key={key}>
+                            <label>{key}: </label>
+                            <select
+                                value={textures[key]}
+                                onChange={(e) => setTextures({ ...textures, [key]: e.target.value })}
+                                onFocus={handleFocus}
+                                onBlur={handleBlur}
+                            >
+                                <option value="">--Select a Texture--</option>
+                                {availableTextures.map(textureFile => (
+                                    <option key={textureFile} value={textureFile}>
+                                        {textureFile}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+                    ))}
+
+                    <h4>Colors (R,G,B)</h4>
+                    {Object.keys(colors).map(key => (
+                        <div key={key}>
+                            <label>{key === 'F' ? 'Floor' : 'Ceiling'}: </label>
+                            <input
+                                type="text"
+                                value={colors[key]}
+                                onChange={(e) => setColors({ ...colors, [key]: e.target.value })}
+                                onFocus={handleFocus}
+                                onBlur={handleBlur}
+                            />
+                        </div>
+                    ))}
+
+                    <h4>Map Grid</h4>
+                    <textarea
+                        rows="10"
+                        cols="30"
+                        value={mapGrid}
+                        onChange={(e) => setMapGrid(e.target.value)}
+                        onFocus={handleFocus}
+                        onBlur={handleBlur}
+                    ></textarea>
+                    <br />
+                    <button onClick={handleSave}>
+                        Save Map & Reload
+                    </button>
+                    <button onClick={ResetMap}>
+                        Reset and Reload
+                    </button>
+                    <button onClick={ExportFile}>
+                        Export your Map
+                    </button>
+                </div>
             </div>
+
+
         </div>
     );
 }
 
 export default Cub3D;
+
+// ​chofe Media Queries f css
