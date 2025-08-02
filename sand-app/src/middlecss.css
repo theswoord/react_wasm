@@ -1,0 +1,24 @@
+.WIP
+{
+    align-items: center;
+    align-self: center;
+    border-radius: 10px;
+}
+.navwebservcss
+{
+    display: flex;
+    flex-direction: column;
+    /* background-color: tomato; */
+        align-items: center;
+    /* align-self: center; */
+    border-radius: 10px;
+}
+.navbar
+{
+    display: flex;
+}
+.generalgame
+{
+    display: flex;
+    
+}

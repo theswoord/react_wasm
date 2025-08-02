@@ -1,38 +1,43 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import ReactDOM from 'react-dom/client'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'; // 1. Import BrowserRouter
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import App from './App.jsx'
 import HomePage from './HomePage.jsx';
-
 import FirstPage from './FirstPage.jsx';
 import SecondPage from './SecondPage.jsx';
 import './index.css'
 
-
-
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <HomePage/>,
+    element: <HomePage />,
+  },
+  {
+    path: "/navsand",
+    element: <HomePage />,
+  },
+  {
+    path: "/navcub", 
+    element: <HomePage />,
+  },
+  {
+    path: "/navcontact",
+    element: <HomePage />,
+  },
+  {
+    path: "/navwebserv",
+    element: <HomePage />,
   },
   {
     path: "/First",
-    element: <FirstPage/>,
+    element: <FirstPage />,
   },
   {
     path: "/Second",
-    element: <SecondPage/>
-  },
+    element: <SecondPage />
+  }
 ]);
 
-// createRoot(document.getElementById('root')).render(
-//   <StrictMode>
-//     <App />
-//   </StrictMode>,
-// )
 createRoot(document.getElementById('root')).render(
-
-    <RouterProvider router={router} />
+  <RouterProvider router={router} />
 );

@@ -10,18 +10,16 @@ import Navcub from './navcub';
 import Navsand from './navsand';
 import Navwebserv from './navwebserv';
 import Navcontact from './navcontact';
-import Navhome from './navhome';
-
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 // --- Section Data ---
 const sections = [
-  { id: 'welcome', path: '/', title: 'About Me', Component: Navhome, bgColor: 'bg-teal-900' },
-  { id: 'sand', path: '/navsand', title: 'Sand Game', Component: Navsand, bgColor: 'bg-purple-900' },
-  { id: 'cub3d', path: '/navcub', title: 'Cub3D', Component: Navcub, bgColor: 'bg-gray-800' },
-  { id: 'webserv', path: '/navwebserv', title: 'webserv', Component: Navwebserv, bgColor: 'bg-orange-500' },
+  { id: 'welcome', path: '/', title: 'About Me', Component: Navcub, bgColor: 'bg-indigo-900' },
+  { id: 'sand', path: '/navsand', title: 'Projects', Component: Navsand, bgColor: 'bg-purple-900' },
+  { id: 'cub3d', path: '/navcub', title: 'Services', Component: Navcub, bgColor: 'bg-gray-800' },
+  { id: 'webserv', path: '/navwebserv', title: 'webserv', Component: Navwebserv, bgColor: 'bg-teal-900' },
   { id: 'contact', path: '/navcontact', title: 'Contact', Component: Navcontact, bgColor: 'bg-teal-900' },
 ];
 
@@ -116,13 +114,13 @@ export default function HomePage() {
           
           gsap.to(window, {
             scrollTo: { y: targetScroll, autoKill: false },
-            duration: 1.6,
+            duration: 0.6,
             ease: 'power2.inOut',
             onComplete: () => {
               // Reset flag after animation completes
               setTimeout(() => {
                 isNavigatingProgrammatically.current = false;
-              }, 1000);
+              }, 100);
             }
           });
         } else {
