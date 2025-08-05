@@ -1,25 +1,32 @@
 import React from 'react';
 import { Link } from 'react-router-dom'; 
 import cub3dcontroller from './assets/cub3d500.png';
-import progressbar from './assets/progress60.png'
-import './middlecss.css'
-
+import progressbar from './assets/progress60.png';
+// No more './middlecss.css' import!
 
 function Navcub() {
   return (
-    <div>
-      {/* <h2>This is the NAVcub3d Component! 🏖️</h2> */}
-      <Link to="/Second" className="cub3d-link" style={{ marginLeft: '10px' }}>
-        {/* <h2>Cub3D</h2> */}
+    // Centering container
+    <div className="flex flex-col items-center justify-center gap-y-8">
+
+      {/* - We removed the inline style.
+        - `transition-transform` and `hover:scale-105` create a nice hover effect.
+        - `focus:outline-none focus:ring-4 focus:ring-blue-400 focus:ring-opacity-50` provides great accessibility for keyboard users.
+      */}
+      <Link to="/Second" className="transition-transform duration-300 ease-in-out hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-400 focus:ring-opacity-50 rounded-lg">
         <img
           src={cub3dcontroller}
-          alt="Go to First Page"
-          className="cub3d-button"
+          alt="Play Cub3D"
+          // `max-w-lg` to control size, `rounded-lg` to match the focus ring.
+          className="max-w-lg w-full rounded-lg shadow-2xl" 
         />
       </Link>
-              <div className='navbar'>
-            <img src={progressbar} alt="almost" />
-          </div>
+      
+      {/* Centering the progress bar */}
+      <div className="w-full max-w-md flex justify-center mt-4">
+        <img src={progressbar} alt="Progress: 60%" className="h-8 object-contain" />
+      </div>
+      
     </div>
   );
 }

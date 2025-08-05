@@ -132,37 +132,31 @@ export default function HomePage() {
     }
   }, [location.pathname, currentSectionIndex]);
 
-  return (
-    <div ref={mainContainerRef} className="h-screen w-screen overflow-hidden">
-      {/* Debug info - remove in production */}
-      <div className="fixed top-4 left-4 z-50 bg-black bg-opacity-70 text-white p-2 rounded text-sm">
-        Current: {sections[currentSectionIndex]?.path} (Index: {currentSectionIndex})
-      </div>
-      
-      <div
-        ref={horizontalScrollerRef}
-        className="h-screen w-[400vw] flex" // Width is 100vw * number of sections
-      >
-        {sections.map(({ id, title, Component, bgColor }, index) => (
-          <section
-            key={id}
-            className={`panel w-screen h-screen flex-shrink-0 flex items-center justify-center relative ${bgColor}`}
-          >
-            <div className="text-white text-center p-8">
-                <h2 className="text-5xl md:text-7xl font-bold uppercase tracking-wider mb-4">
-                  {title}
-                </h2>
-                <div className="max-w-2xl">
-                    <Component />
-                </div>
-                {/* Debug info
-                <div className="mt-4 text-sm opacity-70">
-                  Section {index + 1} - {id}
-                </div> */}
-            </div>
-          </section>
-        ))}
-      </div>
-    </div>
-  );
+ return (
+  <div ref={mainContainerRef} className="h-screen w-screen overflow-hidden">
+      {/* Debug info - can be removed in production */}
+   <div className="fixed top-4 left-4 z-50 bg-black bg-opacity-70 text-white p-2 rounded text-sm">
+    Current: {sections[currentSectionIndex]?.path} ({sections[currentSectionIndex]?.title})
+   </div>
+   
+   <div
+    className={`h-screen w-[${sections.length * 100}vw] flex`}
+   >
+    {sections.map(({ id, Component, bgColor }) => (
+     <section
+      key={id}
+            // These classes will center your component by default.
+            // You can override this inside your component if you need a different alignment.
+      className={`panel w-screen h-screen flex-shrink-0 flex items-center justify-center relative ${bgColor}`}
+     >
+            {/* ✅ CHANGE: The shared title and wrappers have been removed.
+              The component now has full control over the panel.
+            */}
+      <Component />
+
+     </section>
+    ))}
+   </div>
+  </div>
+ );
 }
