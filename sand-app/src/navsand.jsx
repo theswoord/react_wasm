@@ -11,7 +11,7 @@ import './middlecss.css'
 
 function Navsand() {
   return (
-<PageGridLayout backgroundTitle="About Me">
+<PageGridLayout backgroundTitle="About Me" bgcolore='#0000FF'>
     <div className=" col-span-3 row-start-1  col-start-1 bg-[#cbbd93] flex items-center justify-center">
     <p className='text-3xl text-black text-mono'>
       Play Sand game click Below
@@ -28,15 +28,14 @@ function Navsand() {
           src={controllerImage}
           alt="Go to First Page"
           className="controller-button"
+            // className="max-w-lg w-full rounded-lg shadow-2xl" 
+
         />
       </Link>
       </div>
-              {/* <div className='navbar'>
-            <img src={progressbar} alt="almost" />
-          </div> */}
     </div>
           <div className="col-start-2 row-start-3 flex items-center justify-center px-2">
-        <ProgressBar percent={20} />
+        <ProgressBar percent={40} />
       </div>
           </PageGridLayout>
   );

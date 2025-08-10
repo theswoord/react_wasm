@@ -1,33 +1,28 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; 
+import { Link } from 'react-router-dom';
 import cub3dcontroller from './assets/cub3d500.png';
-import progressbar from './assets/progress60.png';
-// No more './middlecss.css' import!
+import PageGridLayout from './tools/TestGrid';
+import ProgressBar from './components/ProgressBar';
 
 function Navcub() {
   return (
-    // Centering container
-    <div className="flex flex-col items-center justify-center gap-y-8">
-
-      {/* - We removed the inline style.
-        - `transition-transform` and `hover:scale-105` create a nice hover effect.
-        - `focus:outline-none focus:ring-4 focus:ring-blue-400 focus:ring-opacity-50` provides great accessibility for keyboard users.
-      */}
-      <Link to="/Second" className="transition-transform duration-300 ease-in-out hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-400 focus:ring-opacity-50 rounded-lg">
-        <img
-          src={cub3dcontroller}
-          alt="Play Cub3D"
-          // `max-w-lg` to control size, `rounded-lg` to match the focus ring.
-          className="max-w-lg w-full rounded-lg shadow-2xl" 
-        />
-      </Link>
-      
-      {/* Centering the progress bar */}
-      <div className="w-full max-w-md flex justify-center mt-4">
-        <img src={progressbar} alt="Progress: 60%" className="h-8 object-contain" />
+    <PageGridLayout>
+      <div className='col-span-3 row-start-2 col-start-2'>
+        <div className='absolute inset-0 flex items-center justify-center p-4'> {/* Added padding for spacing */}
+          <Link to="/Second" className="transition-transform duration-300 ease-in-out hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-400 focus:ring-opacity-50 rounded-lg">
+            <img
+              src={cub3dcontroller}
+              alt="Play Cub3D"
+              // These classes make the image fit its container
+              className="w-full h-auto object-contain max-h-[40vh]" // Constrained height
+            />
+          </Link>
+        </div>
       </div>
-      
-    </div>
+      <div className="col-start-2 row-start-3 flex items-center justify-center px-2">
+        <ProgressBar percent={60} />
+      </div>
+    </PageGridLayout>
   );
 }
 
