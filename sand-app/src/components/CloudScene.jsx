@@ -91,7 +91,7 @@ const CloudScene = () => {
     return (
         <div 
             ref={pixiContainer} 
-            className="w-full h-full rounded-2xl overflow-hidden" 
+            className="w-full h-full overflow-hidden" 
         />
     );
 };
