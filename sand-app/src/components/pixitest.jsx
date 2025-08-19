@@ -24,7 +24,12 @@ import tumble1 from '/src/assets/tumbleweed/tumble1.png';
 import tumble2 from '/src/assets/tumbleweed/tumble2.png';
 import tumble3 from '/src/assets/tumbleweed/tumble3.png';
 import tumble4 from '/src/assets/tumbleweed/tumble4.png';
-
+// Cub3D Theme
+import cub3dground from '/src/assets/metalground.png';
+import pillar1 from '/src/assets/pillar1.png';
+import pillar2 from '/src/assets/pillar2.png';
+import pillar3 from '/src/assets/pillar3.png';
+import grave from '/src/assets/gravestone1.png';
 
 // --- Theme Definitions ---
 
@@ -43,6 +48,7 @@ const themeConfig = {
         ground: groundTextureSrc,
         background: null, // No background, will use solid color
         dinoPosition: 6,
+        Color : 0x87CEEB,
         obstacles: [
             // Added a 'scale' property to each obstacle
             { type: 'static', texture: treeTextureSrc, scale: 0.5 },
@@ -53,6 +59,7 @@ const themeConfig = {
         ground: sandground,
         background: sandBackgroundSrc,
         dinoPosition: 4,
+        Color : 0x000000,
         obstacles: [
             { type: 'static', texture: cactus, scale: 1.3 },
             { 
@@ -64,17 +71,23 @@ const themeConfig = {
         ]
     },
     [CUB3D]: {
-        ground: greybrickground,
+        ground: cub3dground,
         background: null,
         dinoPosition: 2,
+        Color : 0x818589,
         obstacles: [
-            { type: 'static', texture: rockTextureSrc, scale: 0.45 } 
+            { type: 'static', texture: grave, scale: 3 },
+            { type: 'static', texture: pillar1, scale: 3 }, 
+            { type: 'static', texture: pillar2, scale: 3 }, 
+            { type: 'static', texture: pillar3, scale: 3 }, 
+
         ]
     }
 };
 
 
 const Dino = ({ type = 0 }) => {
+    // PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
     const pixiContainer = useRef(null);
     const [pixiApp, setPixiApp] = useState(null);
     const [groundObject, setGroundObject] = useState(null);
@@ -102,7 +115,7 @@ const Dino = ({ type = 0 }) => {
             await app.init({
                 resizeTo: pixiContainer.current,
                 // Use a background color only if no image is specified
-                backgroundColor: currentTheme.background ? 0x000000 : 0x87CEEB, 
+                backgroundColor: currentTheme.background ? 0x000000 : currentTheme.Color, 
                 autoDensity: true,
             });
 
@@ -153,10 +166,11 @@ const Dino = ({ type = 0 }) => {
 
             let spawnTimer = 0;
             let spawnInterval = 120; 
+            let speede = 3
 
             // --- Animation Loop ---
             app.ticker.add((ticker) => {
-                ground.tilePosition.x -= 3 * ticker.deltaTime;
+                ground.tilePosition.x -= speede * ticker.deltaTime;
 
                 spawnTimer += ticker.deltaTime;
                 if (spawnTimer > spawnInterval) {
@@ -193,7 +207,7 @@ const Dino = ({ type = 0 }) => {
                 // Move and Despawn Obstacles
                 for (let i = obstacles.length - 1; i >= 0; i--) {
                     const obstacle = obstacles[i];
-                    obstacle.x -= 3 * ticker.deltaTime;
+                    obstacle.x -= speede * ticker.deltaTime;
 
                     if (obstacle.x < -obstacle.width) {
                         obstacleContainer.removeChild(obstacle);

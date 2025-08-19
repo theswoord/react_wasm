@@ -12,6 +12,8 @@ import Navwebserv from './navwebserv';
 import Navcontact from './navcontact';
 import Navhome from './navhome';
 
+import Go from './components/go';
+
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
@@ -47,7 +49,6 @@ export default function HomePage() {
     const ctx = gsap.context(() => {
       const panels = gsap.utils.toArray(".panel");
       
-      // FIX 1: Use directional snapping
       horizontalScrollTween.current = gsap.to(panels, {
         xPercent: -100 * (panels.length - 1),
         ease: 'none',
@@ -57,7 +58,6 @@ export default function HomePage() {
           scrub: 1,
           snap: {
             snapTo: (value) => {
-              // Calculate section index based on scroll position
               const sectionIndex = Math.round(value * (panels.length - 1));
               return sectionIndex / (panels.length - 1);
             },
@@ -68,9 +68,7 @@ export default function HomePage() {
           onSnapComplete: (self) => {
             if (isNavigatingProgrammatically.current) return;
             
-            // FIX 2: Only update URL when snap completes
             const newSectionIndex = Math.round(self.progress * (panels.length - 1));
-            console.log(`Snapped to Section: ${newSectionIndex}`);
             setCurrentSectionIndex(newSectionIndex);
             navigate(sections[newSectionIndex].path, { replace: true });
           }
@@ -90,8 +88,6 @@ export default function HomePage() {
     const validSectionIndex = targetSectionIndex >= 0 ? targetSectionIndex : 0;
     
     if (validSectionIndex !== currentSectionIndex) {
-      console.log(`URL changed to: ${location.pathname}, scrolling to section ${validSectionIndex}`);
-      
       setCurrentSectionIndex(validSectionIndex);
       isNavigatingProgrammatically.current = true;
       lastRouteChangeTime.current = Date.now();
@@ -99,7 +95,6 @@ export default function HomePage() {
       setTimeout(() => {
         const scrollTriggerInstance = horizontalScrollTween.current?.scrollTrigger;
         if (scrollTriggerInstance) {
-          // FIX 3: Use precise section-based scrolling
           const targetProgress = validSectionIndex / (sections.length - 1);
           
           gsap.to(window, {
@@ -122,12 +117,50 @@ export default function HomePage() {
     }
   }, [location.pathname, currentSectionIndex]);
 
+  // --- ADDED: Navigation Handlers ---
+  const handleNext = () => {
+    const nextIndex = currentSectionIndex + 1;
+    if (nextIndex < sections.length) {
+      navigate(sections[nextIndex].path);
+    }
+  };
+
+  const handlePrevious = () => {
+    const prevIndex = currentSectionIndex - 1;
+    if (prevIndex >= 0) {
+      navigate(sections[prevIndex].path);
+    }
+  };
+
   return (
     <div ref={mainContainerRef} className="h-screen w-screen overflow-hidden">
       {/* Debug info */}
-      <div className="fixed top-4 left-4 z-50 bg-black bg-opacity-70 text-white p-2 rounded text-sm">
+      {/* <div className="fixed top-4 left-4 z-50 bg-black bg-opacity-70 text-white p-2 rounded text-sm">
         Current: {sections[currentSectionIndex]?.path} ({sections[currentSectionIndex]?.title})
-      </div>
+      </div> */}
+
+      {/* --- MODIFIED: Navigation Arrows Container --- */}
+      <>
+        {/* Left arrow - only shows if not the first section */}
+        {currentSectionIndex > 0 && (
+          <div 
+            className="fixed top-8 left-8 z-50 cursor-pointer" 
+            onClick={handlePrevious}
+          >
+            <Go direction={"left"} />
+          </div>
+        )}
+
+        {/* Right arrow - only shows if not the last section */}
+        {currentSectionIndex < sections.length - 1 && (
+          <div 
+            className="fixed top-8 right-8 z-50 cursor-pointer" 
+            onClick={handleNext}
+          >
+            <Go direction={"right"} />
+          </div>
+        )}
+      </>
       
       <div className={`h-screen w-[${sections.length * 100}vw] flex`}>
         {sections.map(({ id, Component, bgColor }) => (

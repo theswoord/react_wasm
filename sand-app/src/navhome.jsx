@@ -43,7 +43,9 @@ function Navhome() {
           <Pixicomponent />
         </div>
 <div className="col-span-2 row-start-2 col-start-2 z-10 flex items-start justify-center pointer-events-none">
-  <div className="bg-orange-100/90 border-4 border-orange-400 shadow-lg p-5 w-[80%] max-h-[85%] font-mono text-base leading-relaxed text-gray-800 opacity-80">
+  <div className="bg-orange-100/90 border-4 border-orange-400 shadow-lg p-5 
+                  w-full max-w-[90%] max-h-[85vh] overflow-y-auto 
+                  font-mono text-base leading-relaxed text-gray-800 opacity-80 break-words">
 
     <div className="mt-1">
       <span className="font-bold">Skills Unlocked:</span>
@@ -56,23 +58,25 @@ function Navhome() {
       </ul>
     </div>
   </div>
-  
 </div>
-<div className="col-span-1 row-start-2 col-start-1 z-10 flex items-start justify-center pointer-events-none">
-  <div className="bg-orange-100/90 border-4 border-orange-400 shadow-lg p-5 w-[100%] max-h-[85%] font-mono text-base leading-relaxed text-gray-800 opacity-80">
 
-    <div className="">
-<span className="font-bold">What you'll find inside:</span>
-<ul className="list-disc list-inside">
-  <li>Two playable games built with C++ and running at native speed via WebAssembly.</li>
-  <li>A live showcase of custom, interactive React components used to build this site.</li>
-  <li>An immersive experience with fluid animations and graphics powered by GSAP & PixiJS.</li>
-  <li>A complete project demonstrating a passion for performance-driven development.</li>
-</ul>
+<div className="col-span-1 row-start-2 col-start-1 z-10 flex items-start justify-center pointer-events-none">
+  <div className="bg-orange-100/90 border-4 border-orange-400 shadow-lg p-5 
+                  w-full max-w-[90%] max-h-[85vh] overflow-y-auto 
+                  font-mono text-base leading-relaxed text-gray-800 opacity-80 break-words">
+
+    <div>
+      <span className="font-bold">What you'll find inside:</span>
+      <ul className="list-disc list-inside">
+        <li>Two playable games built with C++ and running at native speed via WebAssembly.</li>
+        <li>A live showcase of custom, interactive React components used to build this site.</li>
+        <li>An immersive experience with fluid animations and graphics powered by GSAP & PixiJS.</li>
+        <li>A complete project demonstrating a passion for performance-driven development.</li>
+      </ul>
     </div>
   </div>
-  
 </div>
+
         {/* <div className="inset-0 flex items-center justify-center">
           <p className="text-black text-6xl font-bold drop-shadow-lg">
           </p>
