@@ -32,7 +32,7 @@ const Dinosaur = ({ app, ground ,position}) => {
 
             // Position the dino relative to the screen width and the ground's Y position
             console.log(position);
-            animatedSprite.x = app.screen.width / position;
+            animatedSprite.x = Math.round( app.screen.width / position);
             animatedSprite.y = ground.y - (animatedSprite.height / 2) + 10;
 
             // Add the dino to the PARENT's stage
@@ -43,12 +43,16 @@ const Dinosaur = ({ app, ground ,position}) => {
         setupDino();
 
         // Cleanup function: remove the dino from the stage when the component unmounts
-        return () => {
-            if (app.current) {
-                app.current.destroy(true, { children: true, texture: true, baseTexture: true });
-                app.current = null;
-            }
-        };
+return () => {
+  if (app && app.stage && animatedSprite) {
+    if (app.stage.children.includes(animatedSprite)) {
+      app.stage.removeChild(animatedSprite);
+    }
+    animatedSprite.destroy(true);
+    dinoSpriteRef.current = null;
+  }
+};
+
     }, [app, ground]); // Rerun effect if app or ground props change
 
     // This component doesn't need to render its own div or canvas

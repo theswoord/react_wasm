@@ -82,12 +82,12 @@ function Navhome() {
           </p>
         
       </div> */}
-      <div className="row-start-3 col-start-1 col-span-1 flex ">
-       <Girl ></Girl>
+      <div className="row-start-3 col-start-1 col-span-1  flex items-end justify-center">
+       <Girl character={"girl"}></Girl>
       </div>
-      <div className="col-start-3 row-start-3 col-span-1 flex ">
-       <Girl ></Girl>
-      </div>
+      {/* <div className="col-start-3 row-start-3 col-span-1  flex items-end justify-center">
+       <Girl character={"nabil"}></Girl>
+      </div> */}
 
       <div className="col-start-2 row-start-3 flex items-end justify-center">
         <ProgressBar percent={20} />

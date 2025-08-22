@@ -78,12 +78,21 @@ const CloudScene = () => {
         setup();
 
         // Cleanup function when the component unmounts
-        return () => {
-            if (app.current) {
-                app.current.destroy(true, { children: true, texture: true, baseTexture: true });
-                app.current = null;
-            }
-        };
+return () => {
+    if (app.current) {
+        // Collect and unload all textures used in this scene
+        const assetsToUnload = [cloudTexture, cloudTexture2, cloudTexture3];
+        const uniqueAssets = [...new Set(assetsToUnload)];
+
+        uniqueAssets.forEach(asset => {
+            PIXI.Assets.unload(asset);
+        });
+
+        // Destroy the Pixi app completely
+        app.current.destroy(true, { children: true, texture: true, baseTexture: true });
+        app.current = null;
+    }
+};
     }, []);
 
     // ✅ THE FIX: The div now has w-full and h-full to fill its parent grid cell.

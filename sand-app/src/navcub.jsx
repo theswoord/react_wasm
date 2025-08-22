@@ -4,6 +4,8 @@ import cub3dcontroller from './assets/cub3d500.png';
 import PageGridLayout from './tools/TestGrid';
 import ProgressBar from './components/ProgressBar';
 import MiddleScene from './components/pixitest';
+import Girl from './components/girl';
+
 function Navcub() {
   return (
     <PageGridLayout>
@@ -26,7 +28,14 @@ function Navcub() {
 
         {/* </div>
       </div> */}
-      <div className="col-start-2 row-start-3 flex items-center justify-center px-2">
+      <div className="col-start-1 row-start-3 col-span-1  flex items-end justify-center">
+       <Girl character={"nabil"}></Girl>
+      </div>
+      <div className="row-start-3 col-start-3 col-span-1  flex items-end justify-center">
+       <Girl character={"khatr"}></Girl>
+      </div>
+
+      <div className="col-start-2 row-start-3 flex items-end justify-center px-2">
         <ProgressBar percent={60} />
       </div>
     </PageGridLayout>

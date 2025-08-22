@@ -31,13 +31,26 @@ import pillar2 from '/src/assets/pillar2.png';
 import pillar3 from '/src/assets/pillar3.png';
 import grave from '/src/assets/gravestone1.png';
 
+// Webserv Theme
+import webservground from '/src/assets/workinprogressground.png';
+import plaka from '/src/assets/plaka.png';
+import cone from '/src/assets/cone.png';
+// Contact Theme
+import contactground from '/src/assets/groundbrick.png';
+// import plaka from '/src/assets/plaka.png';
+// import cone from '/src/assets/cone.png';
+
+// import pillar1 from '/src/assets/pillar1.png';
+// import pillar2 from '/src/assets/pillar2.png';
+// import pillar3 from '/src/assets/pillar3.png';
+// import grave from '/src/assets/gravestone1.png';
 // --- Theme Definitions ---
 
 const HOMEPAGE = 0;
 const SANDGAME = 1;
 const CUB3D = 2;
-// const WEBSERV = 3; // Example for future themes
-// const CONTACT = 4; // Example for future themes
+const WEBSERV = 3; // Example for future themes
+const CONTACT = 4; // Example for future themes
 
 /**
  * Configuration object for each game theme.
@@ -80,6 +93,37 @@ const themeConfig = {
             { type: 'static', texture: pillar1, scale: 3 }, 
             { type: 'static', texture: pillar2, scale: 3 }, 
             { type: 'static', texture: pillar3, scale: 3 }, 
+
+        ]
+    },
+        [WEBSERV]: {
+        ground: webservground,
+        background: null,
+        dinoPosition: 1.5,
+        Color : 0x818589,
+        obstacles: [
+            { type: 'static', texture: cone, scale: 0.2 },
+            { type: 'static', texture: plaka, scale: 0.3 },
+
+            // { type: 'static', texture: pillar1, scale: 3 }, 
+            // { type: 'static', texture: pillar2, scale: 3 }, 
+            // { type: 'static', texture: pillar3, scale: 3 }, 
+
+        ]
+    },
+            [CONTACT]: {
+        ground: contactground,
+        background: null,
+        dinoPosition: 1.1,
+        Color : 0x818589,
+        obstacles: [
+            { type: 'static', texture: rockTextureSrc, scale: 1 }
+            // { type: 'static', texture: cone, scale: 0.2 },
+            // { type: 'static', texture: plaka, scale: 0.3 },
+
+            // { type: 'static', texture: pillar1, scale: 3 }, 
+            // { type: 'static', texture: pillar2, scale: 3 }, 
+            // { type: 'static', texture: pillar3, scale: 3 }, 
 
         ]
     }
@@ -221,12 +265,34 @@ const Dino = ({ type = 0 }) => {
         setup();
 
         // Cleanup function
-        return () => {
-            if (appRef.current) {
-                appRef.current.destroy(true, { children: true, texture: true, baseTexture: true });
-                appRef.current = null;
+return () => {
+    if (appRef.current) {
+        const currentTheme = themeConfig[type] || themeConfig[HOMEPAGE];
+
+        // Collect all assets for this theme
+        const assetsToUnload = [currentTheme.ground];
+        if (currentTheme.background) {
+            assetsToUnload.push(currentTheme.background);
+        }
+        currentTheme.obstacles.forEach(obs => {
+            if (obs.type === 'static') {
+                assetsToUnload.push(obs.texture);
+            } else if (obs.type === 'animated') {
+                assetsToUnload.push(...obs.textures);
             }
-        };
+        });
+        const uniqueAssets = [...new Set(assetsToUnload)];
+
+        // Unload textures from cache
+        uniqueAssets.forEach(asset => {
+            PIXI.Assets.unload(asset);
+        });
+
+        // Destroy the PIXI app completely
+        appRef.current.destroy(true, { children: true, texture: true, baseTexture: true });
+        appRef.current = null;
+    }
+};
     }, [type]); // Re-run the effect whenever the 'type' prop changes
 
     return (

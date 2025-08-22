@@ -79,6 +79,7 @@
 
 import React, { useRef, useEffect, useState } from "react"; // 👈 Import useState
 import * as PIXI from 'pixi.js';
+// import Linkify from 'linkify-react';
 
 // Image imports (assuming they are in the same location)
 import girl1 from '/src/assets/girl/girl11.png';
@@ -87,11 +88,43 @@ import girl3 from '/src/assets/girl/girl13.png';
 import girl4 from '/src/assets/girl/girl14.png';
 import girl5 from '/src/assets/girl/girl15.png';
 import girl6 from '/src/assets/girl/girl16.png';
+// khatr
+import khatr1 from '/src/assets/khatr/khatr1.png';
+import khatr2 from '/src/assets/khatr/khatr2.png';
+import khatr3 from '/src/assets/khatr/khatr3.png';
+import khatr4 from '/src/assets/khatr/khatr4.png';
+import khatr5 from '/src/assets/khatr/khatr5.png';
+import khatr6 from '/src/assets/khatr/khatr6.png';
+import khatr7 from '/src/assets/khatr/khatr7.png';
+import khatr8 from '/src/assets/khatr/khatr8.png';
+import khatr9 from '/src/assets/khatr/khatr9.png';
+import khatr10 from '/src/assets/khatr/khatr10.png';
+//nabil
+import nabil1 from '/src/assets/nabil/nabil1.png';
+import nabil2 from '/src/assets/nabil/nabil2.png';
+import nabil3 from '/src/assets/nabil/nabil3.png';
+import nabil4 from '/src/assets/nabil/nabil4.png';
+import nabil5 from '/src/assets/nabil/nabil5.png';
+import nabil6 from '/src/assets/nabil/nabil6.png';
+//mbouderr
+import mbouderr1 from '/src/assets/mbouderr/mbouderr1.png';
+import mbouderr2 from '/src/assets/mbouderr/mbouderr2.png';
+import mbouderr3 from '/src/assets/mbouderr/mbouderr3.png';
+import mbouderr4 from '/src/assets/mbouderr/mbouderr4.png';
+import mbouderr5 from '/src/assets/mbouderr/mbouderr5.png';
+import mbouderr6 from '/src/assets/mbouderr/mbouderr6.png';
 
-const Girl = () => {
+
+
+
+const Girl = ({character}) => {
+    let charactertopick;
+    let scaledialo;
+    // let stringtosay;
     const pixiContainer = useRef(null);
     const app = useRef(null);
     // 👇 State to hold the position of the bubble for the HTML overlay
+    const [stringtosay, setStringtosay] = useState("");
     const [bubblePosition, setBubblePosition] = useState({
         top: 0,
         left: 0,
@@ -113,13 +146,68 @@ const Girl = () => {
         });
 
         pixiContainer.current.appendChild(app.current.canvas);
-
         const girlImages = [girl1, girl2, girl3, girl4, girl5, girl6];
+        const khatrImages = [
+khatr1,
+khatr2, 
+khatr3, 
+khatr4, 
+khatr5, 
+khatr6, 
+khatr7, 
+khatr8, 
+khatr9, 
+khatr10]
+const mbouderrImages = [
+mbouderr1,
+mbouderr2,
+mbouderr3,
+mbouderr4,
+mbouderr5,
+mbouderr6]
+const nabilImages = [
+nabil1,
+nabil2,
+nabil3,
+nabil4,
+nabil5,
+nabil6
+]
+if(character == "nabil")
+{
+    charactertopick = nabilImages;
+    scaledialo = 0.8;
+    setStringtosay(`I made this. check out my other projects at <a href="https://github.com/theswoord" class="text-blue-600 underline">My Github :D</a>`);
+}
+if(character == "girl")
+{
+    charactertopick = girlImages;
+    scaledialo = 1;
+    setStringtosay(`I made this website's design <a href="https://www.linkedin.com/in/khadija-esakhi" class="text-blue-600 underline">Here is my Linkedin</a>.`);
+    
+}
+if(character == "khatr")
+{
+    charactertopick = khatrImages;
+    scaledialo = 0.7;
+    setStringtosay(`The ultimate Duo i helped making this project here is my <a href="https://github.com/Zeuus77" class="text-blue-600 underline">My Github</a>`);
+
+    
+}
+if(character == "mbouderr")
+{
+    charactertopick = mbouderrImages;
+    scaledialo = 0.7;
+    setStringtosay(`As a CGI master i helped with this project <a href="https://www.linkedin.com/in/charafbouderraoui" class="text-blue-600 underline">check My linkedin Here.</a>`);
+
+    
+}
         const textures = await Promise.all(
-            girlImages.map(img => PIXI.Assets.load(img))
+            charactertopick.map(img => PIXI.Assets.load(img))
         );
         const animatedSprite = new PIXI.AnimatedSprite(textures);
         animatedSprite.anchor.set(0.5);
+        animatedSprite.scale.set(scaledialo);
         animatedSprite.x = app.current.screen.width / 2;
         animatedSprite.y = app.current.screen.height - (animatedSprite.height / 2);
         animatedSprite.animationSpeed = 0.1;
@@ -129,41 +217,44 @@ const Girl = () => {
 
         // --- CORRECTED BUBBLE DRAWING LOGIC ---
 
-        const dialogueContainer = new PIXI.Container();
-        app.current.stage.addChild(dialogueContainer);
+const dialogueContainer = new PIXI.Container();
+app.current.stage.addChild(dialogueContainer);
 
-        const bubbleWidth = 280;
-        const bubbleHeight = 60;
-        const cornerRadius = 15;
-        const tailHeight = 15;
-        
-        const bubble = new PIXI.Graphics();
-        
-        // 👇 Use the explicit drawing methods
-        bubble.lineStyle(3, 0xDFAA8B);   // 1. Set the border style first
-        bubble.beginFill(0xF2CCB7);       // 2. Begin filling with white
+const bubbleWidth = 280;
+const bubbleHeight = 60;
+const cornerRadius = 15;
+const tailHeight = 15;
 
-        // 3. Draw the shapes
-        bubble.drawRoundedRect(0, 0, bubbleWidth, bubbleHeight, cornerRadius);
-        bubble.moveTo((bubbleWidth / 2) - tailHeight, bubbleHeight);
-        bubble.lineTo(bubbleWidth / 2, bubbleHeight + tailHeight);
-        bubble.lineTo((bubbleWidth / 2) + tailHeight, bubbleHeight);
-        bubble.closePath();
+const bubble = new PIXI.Graphics();
 
-        bubble.endFill();                 // 4. Apply the fill to the drawn shapes
-        
-        dialogueContainer.addChild(bubble);
+// 1. Set styles
+bubble.setStrokeStyle({ width: 3, color: 0xDFAA8B });
+bubble.setFillStyle(0xF2CCB7);
 
-        dialogueContainer.x = animatedSprite.x - (dialogueContainer.width / 2);
-        dialogueContainer.y = animatedSprite.y - animatedSprite.height / 2 - dialogueContainer.height - 10;
+// 2. Draw rounded rect
+bubble.roundRect(0, 0, bubbleWidth, bubbleHeight, cornerRadius);
 
-        setBubblePosition({
-            top: dialogueContainer.y,
-            left: dialogueContainer.x,
-            width: bubbleWidth,
-            height: bubbleHeight,
-            visible: true,
-        });
+// 3. Draw the tail (still need path commands)
+bubble.moveTo((bubbleWidth / 2) - tailHeight, bubbleHeight);
+bubble.lineTo(bubbleWidth / 2, bubbleHeight + tailHeight);
+bubble.lineTo((bubbleWidth / 2) + tailHeight, bubbleHeight);
+bubble.closePath();
+
+// 4. Apply fill (no endFill in v8)
+bubble.fill();
+
+dialogueContainer.addChild(bubble);
+
+dialogueContainer.x = animatedSprite.x - (dialogueContainer.width / 2);
+dialogueContainer.y = animatedSprite.y - animatedSprite.height / 2 - dialogueContainer.height - 10;
+
+setBubblePosition({
+  top: dialogueContainer.y,
+  left: dialogueContainer.x,
+  width: bubbleWidth,
+  height: bubbleHeight,
+  visible: true,
+});
         
     };
 
@@ -171,11 +262,12 @@ const Girl = () => {
 
     return () => {
         if (app.current) {
+            // app.current.unload()
             app.current.destroy(true, { children: true, texture: true, baseTexture: true });
             app.current = null;
         }
     };
-}, []);
+}, [character]);
 
     // 👇 The JSX is now a wrapper with two children: the canvas and the HTML overlay
     return (
@@ -183,7 +275,7 @@ const Girl = () => {
             {/* 1. The PixiJS Canvas */}
             <div
                 ref={pixiContainer}
-                className="w-full h-full rounded-2xl overflow-hidden"
+                className=" w-full h-full rounded-2xl overflow-hidden"
             />
 
             {/* 2. The HTML Dialogue Overlay */}
@@ -200,9 +292,14 @@ const Girl = () => {
                     className="p-2.5 flex items-center justify-center text-center pointer-events-auto"
                 >
                     {/* 👇 Add any HTML content you want here! */}
-                    <p className="text-base text-black">
+                    {/* <p className="text-base text-black">
                         I made this website's design <a href="https://www.google.com" className="text-blue-600 underline">Here is my Linkedin</a>.
-                    </p>
+                    </p> */}
+                    <p
+                      className="text-base text-black"
+                      dangerouslySetInnerHTML={{ __html: stringtosay }}
+                    />
+
                 </div>
             )}
         </div>

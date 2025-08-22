@@ -187,72 +187,99 @@ function Cub3D() {
         // }
     };
 
-    return (
-        <div className="game-container" >
-
-            <div class="wrapper" >
-                <canvas ref={canvasRef} id="canvas" width="800" height="600" tabIndex="0" ></canvas>
-
-                <div className="map-editor" >
-                    <h3>Custom Map Editor</h3>
-
-                    <h4>Textures</h4>
-                    {Object.keys(textures).map(key => (
-                        <div key={key}>
-                            <label>{key}: </label>
-                            <select
-                                value={textures[key]}
-                                onChange={(e) => setTextures({ ...textures, [key]: e.target.value })}
-                                onFocus={handleFocus}
-                                onBlur={handleBlur}
-                            >
-                                <option value="">--Select a Texture--</option>
-                                {availableTextures.map(textureFile => (
-                                    <option key={textureFile} value={textureFile}>
-                                        {textureFile}
-                                    </option>
-                                ))}
-                            </select>
-                        </div>
-                    ))}
-
-                    <h4>Colors (R,G,B)</h4>
-                    {Object.keys(colors).map(key => (
-                        <div key={key}>
-                            <label>{key === 'F' ? 'Floor' : 'Ceiling'}: </label>
-                            <input
-                                type="text"
-                                value={colors[key]}
-                                onChange={(e) => setColors({ ...colors, [key]: e.target.value })}
-                                onFocus={handleFocus}
-                                onBlur={handleBlur}
-                            />
-                        </div>
-                    ))}
-
-                    <h4>Map Grid</h4>
-                    <textarea
-                        rows="10"
-                        cols="30"
-                        value={mapGrid}
-                        onChange={(e) => setMapGrid(e.target.value)}
-                        onFocus={handleFocus}
-                        onBlur={handleBlur}
-                    ></textarea>
-                    <br />
-                    <button onClick={handleSave}>
-                        Save Map & Reload
-                    </button>
-                    <button onClick={ResetMap}>
-                        Reset and Reload
-                    </button>
-                    <button onClick={ExportFile}>
-                        Export your Map
-                    </button>
+        return (
+        <div className="min-h-screen w-full flex flex-col items-center justify-center bg-slate-900 text-slate-300 font-sans p-4 gap-4">
+            
+            {/* Title and How to Play Section */}
+            <div className="text-center group relative">
+                <h1 className="text-5xl font-bold text-white tracking-wider" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.5)' }}>
+                    Cub3D
+                </h1>
+                <h4 className="text-cyan-400 cursor-pointer mt-1">how to play?</h4>
+                
+                {/* Hidden "How to Play" content */}
+                <div className="absolute left-1/2 -translate-x-1/2 mt-2 w-max p-6 bg-slate-800/80 backdrop-blur-sm rounded-lg shadow-lg text-left opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none group-hover:pointer-events-auto z-10">
+                    <h1 className="text-xl font-bold text-white mb-2">How to Play / Comment jouer</h1>
+                    <p className="font-bold text-cyan-300 mt-4">Turning / Tourner</p>
+                    <ul className="list-disc list-inside text-slate-300">
+                        <li><strong>Right arrow / flèche droite</strong> → : Turn Right / Tourner à droite</li>
+                        <li><strong>Left arrow / flèche gauche</strong> ← : Turn Left / Tourner à gauche</li>
+                    </ul>
+                     <p className="font-bold text-cyan-300 mt-4">Movement</p>
+                    <ul className="list-disc list-inside text-slate-300">
+                        <li><strong>W / Z : </strong> Advance / avance</li>
+                        <li><strong>S : </strong>Backward / Recule</li>
+                        <li><strong>A / Q : </strong> Strafe Left / déplacer à gauche</li>
+                        <li><strong>D : </strong>Strafe right / déplacer à droite</li>
+                    </ul>
                 </div>
             </div>
 
+            {/* Game and Editor Container */}
+            <div className="flex flex-col md:flex-row items-start gap-8">
+                <canvas ref={canvasRef} id="canvas" width="800" height="600" tabIndex="0" className="border-2 border-slate-600 rounded-lg shadow-2xl focus:outline-none focus:ring-2 focus:ring-cyan-500"></canvas>
+                
+                {/* Map Editor */}
+                <div className="bg-slate-800/50 p-6 rounded-lg shadow-lg w-full max-w-md backdrop-blur-sm text-slate-300">
+                    <h3 className="text-2xl font-bold mb-4 text-white">Custom Map Editor</h3>
+                    
+                    <h4 className="text-xl font-semibold mt-4 mb-2 text-cyan-300">Textures</h4>
+                    <div className="space-y-2">
+                        {Object.keys(textures).map(key => (
+                            <div key={key} className="flex items-center justify-between">
+                                <label className="font-mono font-bold">{key}:</label>
+                                <select
+                                    value={textures[key]}
+                                    onChange={(e) => setTextures({ ...textures, [key]: e.target.value })}
+                                    onFocus={handleFocus} onBlur={handleBlur}
+                                    className="bg-slate-700 border border-slate-600 rounded-md p-1 w-2/3 text-slate-300 focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                                >
+                                    <option value="">--Select a Texture--</option>
+                                    {availableTextures.map(textureFile => (
+                                        <option key={textureFile} value={textureFile}>{textureFile.split('/').pop()}</option>
+                                    ))}
+                                </select>
+                            </div>
+                        ))}
+                    </div>
 
+                    <h4 className="text-xl font-semibold mt-4 mb-2 text-cyan-300">Colors (R,G,B)</h4>
+                    <div className="space-y-2">
+                        {Object.keys(colors).map(key => (
+                            <div key={key} className="flex items-center justify-between">
+                                <label className="font-bold">{key === 'F' ? 'Floor' : 'Ceiling'}:</label>
+                                <input
+                                    type="text" value={colors[key]}
+                                    onChange={(e) => setColors({ ...colors, [key]: e.target.value })}
+                                    onFocus={handleFocus} onBlur={handleBlur}
+                                    className="bg-slate-700 border border-slate-600 rounded-md p-1 w-2/3 text-slate-300 focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                                />
+                            </div>
+                        ))}
+                    </div>
+
+                    <h4 className="text-xl font-semibold mt-4 mb-2 text-cyan-300">Map Grid</h4>
+                    <textarea
+                        rows="8"
+                        value={mapGrid}
+                        onChange={(e) => setMapGrid(e.target.value)}
+                        onFocus={handleFocus} onBlur={handleBlur}
+                        className="bg-slate-900 border border-slate-600 rounded-md p-2 w-full font-mono text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                    ></textarea>
+
+                    <div className="flex justify-between mt-4 gap-2">
+                         <button onClick={handleSave} className="flex-1 bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded-lg transition-colors">
+                            Save & Reload
+                        </button>
+                        <button onClick={ResetMap} className="flex-1 bg-slate-600 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded-lg transition-colors">
+                            Reset
+                        </button>
+                        <button onClick={ExportFile} className="flex-1 bg-slate-600 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded-lg transition-colors">
+                            Export Map
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }

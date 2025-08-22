@@ -6,7 +6,7 @@ import PageGridLayout from './tools/TestGrid'
 import ProgressBar from './components/ProgressBar';
 import Dino from './components/dino';
 import MiddleScene from './components/pixitest';
-
+import Girl from './components/girl';
 
 
 import './middlecss.css'
@@ -44,6 +44,9 @@ function Navsand() {
           </div>
         {/* </div> */}
       {/* </div> */}
+            <div className="col-start-1 row-start-3 col-span-1  flex items-end justify-center">
+             <Girl character={"nabil"}></Girl>
+            </div>
       <div className="col-start-2 row-start-3 flex items-end justify-center px-2">
         <ProgressBar percent={40} />
       </div>
