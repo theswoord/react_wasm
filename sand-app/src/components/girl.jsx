@@ -183,14 +183,14 @@ if(character == "girl")
 {
     charactertopick = girlImages;
     scaledialo = 1;
-    setStringtosay(`I made this website's design <a href="https://www.linkedin.com/in/khadija-esakhi" class="text-blue-600 underline">Here is my Linkedin</a>.`);
+    setStringtosay(`I made this website's design <a href="https://www.google.com" class="text-blue-600 underline">Here is my Linkedin</a>.`);
     
 }
 if(character == "khatr")
 {
     charactertopick = khatrImages;
     scaledialo = 0.7;
-    setStringtosay(`The ultimate Duo i helped making this project here is my <a href="https://github.com/Zeuus77" class="text-blue-600 underline">My Github</a>`);
+    setStringtosay(`The ultimate Duo i helped making this project here is <a href="https://github.com/Zeuus77" class="text-blue-600 underline">My Github</a>`);
 
     
 }
