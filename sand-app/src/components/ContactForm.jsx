@@ -1,6 +1,6 @@
 // src/components/ContactForm.js
 
-import React, { useState } from 'react';
+import React, { useState , useRef } from 'react';
 import emailjs from '@emailjs/browser'; 
 
 // An SVG icon for the send button for a nicer touch
@@ -13,7 +13,7 @@ const SendIcon = () => (
 
 
 function ContactForm() {
-  const form = useRef(); // 👈 Create a ref for the form element
+  const form = useRef();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
