@@ -1,9 +1,15 @@
 import React, { useRef, useEffect } from 'react';
 import gameModule from './game/reactgame.js';
+import Go from './components/go';
+import { useNavigate } from 'react-router-dom';
+
+
 
 // You no longer need to import FirstPage.css
 
+
 function WasmGame({ gameName }) {
+  const navigate = useNavigate();
   const canvasRef = useRef(null);
   const moduleRef = useRef(null);
 
@@ -30,10 +36,21 @@ function WasmGame({ gameName }) {
     };
   }, []);
 
+    const handlePrevious = () => {
+
+      navigate(-1);
+  };
+
  return (
     // Main container with a warm, dark, sandy background
     <div className="min-h-screen w-full flex flex-col items-center justify-center bg-stone-900 text-amber-100 font-sans p-4 gap-6">
 
+                <div 
+            className="fixed top-8 left-8 z-50 cursor-pointer" 
+            onClick={handlePrevious}
+          >
+            <Go direction={"left"} />
+          </div>
       {/* Game Title with spoiler effect */}
       <h1 
         className="group text-5xl font-bold text-amber-200 tracking-wider cursor-default" 

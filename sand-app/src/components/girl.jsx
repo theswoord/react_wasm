@@ -183,7 +183,7 @@ if(character == "girl")
 {
     charactertopick = girlImages;
     scaledialo = 1;
-    setStringtosay(`I made this website's design <a href="https://www.google.com" class="text-blue-600 underline">Here is my Linkedin</a>.`);
+    setStringtosay(`I made this website's design <a href="https://github.com/SITD7" class="text-blue-600 underline">Here is my Linkedin</a>.`);
     
 }
 if(character == "khatr")

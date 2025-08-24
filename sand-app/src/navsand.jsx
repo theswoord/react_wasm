@@ -7,7 +7,7 @@ import ProgressBar from './components/ProgressBar';
 import Dino from './components/dino';
 import MiddleScene from './components/pixitest';
 import Girl from './components/girl';
-
+import ScreenshotViewer from './components/ScreenshotViewer';
 
 import './middlecss.css'
 import Dinosaur from './components/dino';
@@ -47,8 +47,13 @@ function Navsand() {
             <div className="col-start-1 row-start-3 col-span-1  flex items-end justify-center">
              <Girl character={"nabil"}></Girl>
             </div>
-      <div className="col-start-2 row-start-3 flex items-end justify-center px-2">
-        <ProgressBar percent={40} />
+      <div className="col-start-2 row-start-3 flex flex-col items-center justify-end px-2 gap-4">
+        {/* Add the screenshot viewer here */}
+        <ScreenshotViewer gameType="sand" />
+        {/* Keep your progress bar */}
+        <div className="w-full">
+            <ProgressBar percent={40} />
+        </div>
       </div>
     </PageGridLayout>
   );

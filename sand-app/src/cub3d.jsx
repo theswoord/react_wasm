@@ -3,7 +3,11 @@ import gameModule from './game/cub.js';
 import wasmUrl from './game/cub.wasm?url';
 import dataUrl from './game/cub.data?url';
 import movement from './assets/movementcube.png'
+import { useNavigate } from 'react-router-dom';
+import Go from './components/go';
 import './cube3d.css'
+
+
 
 // --- Helper Functions to Parse and Build the Map ---
 const availableTextures = [
@@ -78,6 +82,7 @@ ${mapGrid}`;
 
 
 function Cub3D() {
+      const navigate = useNavigate();
     const canvasRef = useRef(null);
     const moduleRef = useRef(null);
 
@@ -187,9 +192,18 @@ function Cub3D() {
         // }
     };
 
+        const handlePrevious = () => {
+
+      navigate(-1);
+  };
         return (
         <div className="min-h-screen w-full flex flex-col items-center justify-center bg-slate-900 text-slate-300 font-sans p-4 gap-4">
-            
+                            <div 
+            className="fixed top-8 left-8 z-50 cursor-pointer" 
+            onClick={handlePrevious}
+          >
+            <Go direction={"left"} />
+          </div>
             {/* Title and How to Play Section */}
             <div className="text-center group relative">
                 <h1 className="text-5xl font-bold text-white tracking-wider" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.5)' }}>
