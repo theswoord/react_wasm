@@ -289,7 +289,7 @@ return () => {
         });
 
         // Destroy the PIXI app completely
-        appRef.current.destroy(true, { children: true, texture: true, baseTexture: true });
+        // appRef.current.destroy(true, { children: true, texture: true, baseTexture: true });
         appRef.current = null;
     }
 };

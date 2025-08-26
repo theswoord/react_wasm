@@ -34,15 +34,14 @@ function ContactForm() {
     const templateID =  import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
     const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
+    // console.log(serviceID);
+    // console.log(publicKey);
+    // console.log(templateID);
+
     emailjs.sendForm(serviceID, templateID, form.current, publicKey)
-      .then((result) => {
-          console.log(result.text);
-          alert(`Thank you, ${formData.name}! Your message has been sent successfully.`);
+    
           setFormData({ name: '', email: '', message: '' }); // Reset form
-      }, (error) => {
-          console.log(error.text);
-          alert('Sorry, something went wrong. Please try again later.');
-      });
+
   };
 
   return (

@@ -263,8 +263,9 @@ setBubblePosition({
     return () => {
         if (app.current) {
             // app.current.unload()
-            app.current.destroy(true, { children: true, texture: true, baseTexture: true });
-            app.current = null;
+            // app.current.destroy(true, { children: true, texture: true, baseTexture: true });
+            // app.current = null;
+            
         }
     };
 }, [character]);
