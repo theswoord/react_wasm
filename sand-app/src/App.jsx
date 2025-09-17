@@ -8,6 +8,8 @@ import { Routes, Route } from 'react-router-dom';
 import HomePage from './HomePage';
 import FirstPage from './FirstPage';
 import SecondPage from './SecondPage';
+import Webserver from './webserv';
+
 
 
 function App() {
@@ -30,6 +32,8 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/first-page" element={<FirstPage />} />
         <Route path="/second-page" element={<SecondPage />} />
+        <Route path="/server" element={<Webserver />} />
+
       </Routes>
     </div>
       <h1>Vite + React</h1>

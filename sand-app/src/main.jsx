@@ -6,6 +6,7 @@ import HomePage from './HomePage.jsx';
 import FirstPage from './FirstPage.jsx';
 import Sand from './WasmGame.jsx';
 import CuB3d from './cub3d.jsx'
+import Webserver from './webserv.jsx';
 
 import SecondPage from './SecondPage.jsx';
 import './index.css'
@@ -38,6 +39,11 @@ const router = createBrowserRouter([
   {
     path: "/Second",
     element: <CuB3d />
+  },
+  {
+    path: "/webserv"
+    ,
+    element: <Webserver/>
   }
 ]);
 
