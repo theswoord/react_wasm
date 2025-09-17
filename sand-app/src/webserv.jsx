@@ -15,7 +15,7 @@ function Webserverr() {
   // We put this in a function so we can call it on load AND after submitting.
   const fetchData = async () => {
     try {
-      const response = await fetch("http://api.nabilbouhali.xyz/results.json");
+      const response = await fetch("https://api.nabilbouhali.xyz/results.json");
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
@@ -42,7 +42,7 @@ function Webserverr() {
     setError(null);
 
     try {
-      const response = await fetch("http://api.nabilbouhali.xyz/results.json", {
+      const response = await fetch("https://api.nabilbouhali.xyz/results.json", {
         method: "PATCH",
         headers: {
           "amount":selectedAmount.toString(),
