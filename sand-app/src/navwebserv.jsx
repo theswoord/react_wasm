@@ -17,15 +17,12 @@ function Navwebserv() {
     <PageGridLayout backgroundTitle="About Me">
 
       <div className=" col-span-3 row-start-1 z-20 col-start-1 flex items-center justify-center">
-        <p className='text-3xl text-black text-mono'>
+        <p className='text-3xl text-black text-mono text-gray-100'>
           press the giant cone in order to test the webserver
         </p>
 
       </div>
-      <div className="col-span-3 row-span-1 col-start-1 row-start-2 z-0 flex items-center justify-center pointer-events-none">
-        <MiddleScene type={3} />
-      </div>
-      <Link to="/webserv" className="col-span-1 row-span-1 col-start-3 row-start-2 z-10 flex items-center justify-center">
+      <Link to="/webserv" className="col-span-1 row-span-1 col-start-2 row-start-2 z-10 flex items-center justify-center">
         <img
           src={cub3dcontroller}
           alt="Play Cub3D"

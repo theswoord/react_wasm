@@ -56,7 +56,7 @@ import React from 'react';
 
 // Simplified cell with no border for a seamless grid
 function GridBackgroundCell() {
-  return <div className="bg-gray-200 rounded-none"></div>;
+  return <div className="bg-gray-800 rounded-none"></div>;
 }
 
 function PageGridLayout({ children, backgroundTitle = '' }) {
